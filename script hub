@@ -1,0 +1,37 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local SCRIPT_URLS = {
+    [17122385635] = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/main/bb%20legends",
+    [77747658251236] = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/main/2k7%20first.lua",
+}
+
+local currentPlaceId = game.PlaceId
+local scriptUrl = SCRIPT_URLS[currentPlaceId]
+
+if scriptUrl then
+    print("Auto-detected game:", currentPlaceId, "Loading script from:", scriptUrl)
+    
+    local success, result = pcall(function()
+        return game:HttpGet(scriptUrl)
+    end)
+    
+    if success and result then
+        
+        if string.sub(result, 1, 1) == "<" then
+            warn("Got HTML instead of script. Check your raw URL.")
+            return
+        end
+        
+        local func, err = loadstring(result)
+        if func then
+            pcall(func)  -- Use pcall to catch errors inside the loaded script
+        else
+            warn("Loadstring error:", err)
+        end
+    else
+        warn("Failed to fetch script:", result)
+    end
+else
+    warn("No script mapped for PlaceId:", currentPlaceId)
+end
