@@ -9,32 +9,35 @@ local SCRIPT_URLS = {
     [14386691987] = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/main/bb%20legends",
 }
 
+-- Fallback universal script (used when PlaceId not in the list)
+local UNIVERSAL_URL = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/universal%20script"
+
 local currentPlaceId = game.PlaceId
 local scriptUrl = SCRIPT_URLS[currentPlaceId]
 
 if scriptUrl then
     print("Auto-detected game:", currentPlaceId, "Loading script from:", scriptUrl)
+else
+    print("No specific script for PlaceId:", currentPlaceId, "Loading universal fallback UI")
+    scriptUrl = UNIVERSAL_URL
+end
+
+local success, result = pcall(function()
+    return game:HttpGet(scriptUrl)
+end)
+
+if success and result then
+    if string.sub(result, 1, 1) == "<" then
+        warn("Got HTML instead of script. Check your raw URL.")
+        return
+    end
     
-    local success, result = pcall(function()
-        return game:HttpGet(scriptUrl)
-    end)
-    
-    if success and result then
-        
-        if string.sub(result, 1, 1) == "<" then
-            warn("Got HTML instead of script. Check your raw URL.")
-            return
-        end
-        
-        local func, err = loadstring(result)
-        if func then
-            pcall(func)  -- Use pcall to catch errors inside the loaded script
-        else
-            warn("Loadstring error:", err)
-        end
+    local func, err = loadstring(result)
+    if func then
+        pcall(func)  -- Execute the script
     else
-        warn("Failed to fetch script:", result)
+        warn("Loadstring error:", err)
     end
 else
-    warn("No script mapped for PlaceId:", currentPlaceId)
+    warn("Failed to fetch script:", result)
 end
