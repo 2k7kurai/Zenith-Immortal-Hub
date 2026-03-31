@@ -7,6 +7,7 @@ local SCRIPT_URLS = {
     [124914780116925] = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/main/bb%20legends",
     [71832465156084] = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/main/bb%20legends",
     [14386691987] = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/main/bb%20legends",
+    [134558434771720] = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/Arcade%20Basketball",
 }
 
 -- Fallback universal script (used when PlaceId not in the list)
