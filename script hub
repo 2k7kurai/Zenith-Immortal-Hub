@@ -46,7 +46,8 @@ local SCRIPTS = {
         {name = "Adaptive V1", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/BB%20adaptive%20Parry%20V1"},
     },
     [142823291] = {
-        {name = "mm2 script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/mm2"},
+        {name = "best mm2 script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/mm2"},
+        {name = "poor version mm2", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/mm2_poor_version"},
     },
 }
 
@@ -100,7 +101,7 @@ local function showSelectionUI(scriptList)
     title.Size = UDim2.new(1, 0, 0, 30)
     title.Position = UDim2.new(0, 0, 0, 10)
     title.BackgroundTransparency = 1
-    title.Text = "Choose a Script"
+    title.Text = "Choose a Script if 1 doesnt work try other"
     title.TextColor3 = Color3.fromRGB(255, 255, 255)
     title.TextSize = 18
     title.Font = Enum.Font.SourceSansBold
