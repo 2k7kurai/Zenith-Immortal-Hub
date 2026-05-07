@@ -38,9 +38,6 @@ local SCRIPTS = {
     [17662297954] = {
         {name = "Kaizen Script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/kaizen"},
     },
-    [119916675926168] = {
-        {name = "Kaizen Script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/kaizen"},
-    },
     [13772394625] = {
         {name = "BladeBallv2", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/blade%20ball%20script"},
     },
