@@ -45,7 +45,7 @@ local SCRIPTS = {
         {name = "best mm2 script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/mm2"},
         {name = "poor version mm2", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/mm2_poor_version"},
     },
-    [119916675926168] = {
+    [893973440] = {
         {name = "Flee the facility", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/FTF"},
     },
 }
