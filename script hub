@@ -1,142 +1,244 @@
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
--- ── Script database ──────────────────────────────────────────────
--- Each PlaceId points to a table of {name, url} pairs.
--- When a game has multiple entries, a selection GUI will appear.
-local SCRIPTS = {
-    [17122385635] = {
-        {name = "BB Legends Script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/main/bb%20legends"},
-    },
-    [77747658251236] = {
-        {name = "Sailor Piece Script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/sailor%20piece"},
-    },
-    [138368689293913] = {
-        {name = "Sailor Piece Script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/sailor%20piece"},
-    },
-    [75159314259063] = {
-        {name = "Sailor Piece Script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/sailor%20piece"},
-    },
-    [99684056491472] = {
-        {name = "Sailor Piece Script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/sailor%20piece"},
-    },
-    [123955125827131] = {
-        {name = "Sailor Piece Script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/sailor%20piece"},
-    },
-    [124914780116925] = {
-        {name = "BB Legends Script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/main/bb%20legends"},
-    },
-    [71832465156084] = {
-        {name = "BB Legends Script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/main/bb%20legends"},
-    },
-    [14386691987] = {
-        {name = "BB Legends Script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/main/bb%20legends"},
-    },
-    [134558434771720] = {
-        {name = "Arcade Basketball Script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/Arcade%20Basketball"},
-    },
-    [17662297954] = {
-        {name = "Kaizen Script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/kaizen"},
-    },
-    [13772394625] = {
-        {name = "BladeBallv2", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/blade%20ball%20script"},
-    },
+
+
+
+local PLACE_SCRIPTS = {
     [142823291] = {
-        {name = "best mm2 script", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/mm2"},
-        {name = "poor version mm2", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/mm2_poor_version"},
-    },
-    [893973440] = {
-        {name = "Flee the facility", url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/FTF"},
+        {
+            name = "Best MM2 Script",
+            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/mm2"
+        },
+        {
+            name = "Poor Version MM2",
+            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/mm2_poor_version"
+        },
     },
 }
 
--- Fallback when the place isn't in the list
-local UNIVERSAL_URL = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/universal%20script"
 
--- ── Helper: fetch and execute a script URL ──────────────────────
+local GAME_SCRIPTS = {
+
+    -- AOT
+    [4658598196] = {
+        {
+            name = "AOT Script",
+            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/aqout"
+        },
+    },
+
+    -- Sailor Piece
+    [9186719164] = {
+        {
+            name = "Sailor Piece Script",
+            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/sailor%20piece"
+        },
+    },
+
+    -- BB Legends
+    [4931927012] = {
+        {
+            name = "BB Legends Script",
+            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/main/bb%20legends"
+        },
+    },
+
+    -- Arcade Basketball
+    [7884563721] = {
+        {
+            name = "Arcade Basketball Script",
+            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/Arcade%20Basketball"
+        },
+    },
+
+    -- Kaizen
+    [6048923315] = {
+        {
+            name = "Kaizen Script",
+            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/kaizen"
+        },
+    },
+
+    -- Blade Ball
+    [4777817887] = {
+        {
+            name = "BladeBall V2",
+            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/blade%20ball%20script"
+        },
+    },
+
+    -- MM2
+    [66654135] = {
+        {
+            name = "Best MM2 Script",
+            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/mm2"
+        },
+        {
+            name = "Poor Version MM2",
+            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/mm2_poor_version"
+        },
+    },
+
+    -- Flee The Facility
+    [372226183] = {
+        {
+            name = "Flee The Facility",
+            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/FTF"
+        },
+    },
+}
+
+
+local UNIVERSAL_URL =
+    "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/universal%20script"
+
+
+
+local function notify(text)
+    pcall(function()
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "Zenith Hub",
+            Text = text,
+            Duration = 5
+        })
+    end)
+end
+
 local function loadScript(url, scriptName)
-    scriptName = scriptName or "script"
-    print("Loading " .. scriptName .. " from: " .. url)
+    scriptName = scriptName or "Script"
+
+    print("[Zenith Hub] Loading:", scriptName)
+    print("[Zenith Hub] URL:", url)
+
+    notify("Loading " .. scriptName)
 
     local success, result = pcall(function()
         return game:HttpGet(url)
     end)
 
     if not success or not result then
-        warn("Failed to fetch " .. scriptName .. ":", result)
+        warn("[Zenith Hub] Failed to fetch script:", result)
+        notify("Failed to fetch script")
         return
     end
 
-    task.wait(0.5)
-
-    if string.sub(result, 1, 1) == "<" then
-        warn("Got HTML instead of script. Check your raw URL for " .. scriptName)
+    if result:sub(1, 1) == "<" then
+        warn("[Zenith Hub] Got HTML instead of raw script.")
+        notify("Invalid raw GitHub URL")
         return
     end
 
     local func, err = loadstring(result)
-    if func then
-        print("Executing " .. scriptName .. " ...")
-        pcall(func)
-    else
-        warn("Loadstring error for " .. scriptName .. ":", err)
+
+    if not func then
+        warn("[Zenith Hub] Loadstring error:", err)
+        notify("Loadstring failed")
+        return
     end
+
+    local ran, runtimeErr = pcall(func)
+
+    if not ran then
+        warn("[Zenith Hub] Runtime error:", runtimeErr)
+        notify("Runtime error")
+        return
+    end
+
+    notify("Loaded " .. scriptName)
 end
 
--- ── GUI for choosing a script (shown only when >1 option) ──────
+
+
 local function showSelectionUI(scriptList)
-    local screenGui = Instance.new("ScreenGui")
-    screenGui.Name = "ScriptSelector"
-    screenGui.Parent = player:WaitForChild("PlayerGui")
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "ZenithScriptSelector"
+    gui.ResetOnSpawn = false
+    gui.Parent = player:WaitForChild("PlayerGui")
 
     local frame = Instance.new("Frame")
-    frame.Size = UDim2.new(0, 250, 0, 40 * #scriptList + 50)
-    frame.Position = UDim2.new(0.5, -125, 0.5, -((40 * #scriptList + 50) / 2))
-    frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    frame.Size = UDim2.new(0, 320, 0, (#scriptList * 45) + 70)
+    frame.Position = UDim2.new(0.5, -160, 0.5, -((#scriptList * 45) + 70)/2)
+    frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     frame.BorderSizePixel = 0
-    frame.Parent = screenGui
+    frame.Parent = gui
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 10)
+    corner.Parent = frame
 
     local title = Instance.new("TextLabel")
-    title.Size = UDim2.new(1, 0, 0, 30)
-    title.Position = UDim2.new(0, 0, 0, 10)
+    title.Size = UDim2.new(1, 0, 0, 40)
     title.BackgroundTransparency = 1
-    title.Text = "Choose a Script if 1 doesnt work try other"
-    title.TextColor3 = Color3.fromRGB(255, 255, 255)
-    title.TextSize = 18
-    title.Font = Enum.Font.SourceSansBold
+    title.Text = "Choose a Script"
+    title.TextColor3 = Color3.new(1,1,1)
+    title.Font = Enum.Font.GothamBold
+    title.TextSize = 20
     title.Parent = frame
 
-    for i, scriptData in ipairs(scriptList) do
+    for i, data in ipairs(scriptList) do
         local button = Instance.new("TextButton")
-        button.Size = UDim2.new(1, -20, 0, 30)
-        button.Position = UDim2.new(0, 10, 0, 10 + 30 + (i - 1) * 35)
-        button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-        button.TextColor3 = Color3.fromRGB(255, 255, 255)
-        button.Text = scriptData.name
+
+        button.Size = UDim2.new(1, -20, 0, 35)
+        button.Position = UDim2.new(0, 10, 0, 45 + ((i - 1) * 40))
+
+        button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        button.TextColor3 = Color3.new(1,1,1)
+
+        button.Font = Enum.Font.Gotham
         button.TextSize = 16
-        button.Font = Enum.Font.SourceSans
+
+        button.Text = data.name
+
         button.Parent = frame
 
+        local bCorner = Instance.new("UICorner")
+        bCorner.CornerRadius = UDim.new(0, 8)
+        bCorner.Parent = button
+
         button.MouseButton1Click:Connect(function()
-            screenGui:Destroy()
-            loadScript(scriptData.url, scriptData.name)
+            gui:Destroy()
+            loadScript(data.url, data.name)
         end)
     end
 end
 
--- ── Main logic ──────────────────────────────────────────────────
+
+
 local placeId = game.PlaceId
-local scriptsForHere = SCRIPTS[placeId]
+local gameId = game.GameId
+
+print("PlaceId:", placeId)
+print("GameId:", gameId)
+
+if setclipboard then
+    setclipboard(tostring(gameId))
+    print("Copied GameId to clipboard.")
+end
+
+local scriptsForHere =
+    PLACE_SCRIPTS[placeId]
+    or GAME_SCRIPTS[gameId]
 
 if scriptsForHere then
+
     if scriptsForHere[1] and not scriptsForHere[2] then
-        -- Only one script → load directly
-        loadScript(scriptsForHere[1].url, scriptsForHere[1].name)
+        loadScript(
+            scriptsForHere[1].url,
+            scriptsForHere[1].name
+        )
     else
-        -- Multiple options → let the user pick
         showSelectionUI(scriptsForHere)
     end
+
 else
-    print("No specific script for PlaceId:", placeId, "- using universal fallback")
-    loadScript(UNIVERSAL_URL, "Universal Script")
+    print("[Zenith Hub] No game-specific script found.")
+    print("[Zenith Hub] Loading universal fallback.")
+
+    notify("Using universal script")
+
+    loadScript(
+        UNIVERSAL_URL,
+        "Universal Script"
+    )
 end
