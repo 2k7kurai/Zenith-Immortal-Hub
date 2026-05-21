@@ -1,23 +1,6 @@
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
-
-
-
-local PLACE_SCRIPTS = {
-    [142823291] = {
-        {
-            name = "Best MM2 Script",
-            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/mm2"
-        },
-        {
-            name = "Poor Version MM2",
-            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/mm2_poor_version"
-        },
-    },
-}
-
-
 local GAME_SCRIPTS = {
 
     -- AOT
@@ -68,7 +51,7 @@ local GAME_SCRIPTS = {
         },
     },
 
-    -- MM2
+    -- MM2 (shows selection UI because there are 2 scripts)
     [66654135] = {
         {
             name = "Best MM2 Script",
@@ -87,13 +70,18 @@ local GAME_SCRIPTS = {
             url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/FTF"
         },
     },
-}
 
+    -- Da Hood
+    [1008451066] = {
+        {
+            name = "Da Hood Script",
+            url = "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/DH"
+        },
+    },
+}
 
 local UNIVERSAL_URL =
     "https://raw.githubusercontent.com/2k7kurai/Zenith-Ft-Reach-art/refs/heads/main/universal%20script"
-
-
 
 local function notify(text)
     pcall(function()
@@ -148,8 +136,6 @@ local function loadScript(url, scriptName)
     notify("Loaded " .. scriptName)
 end
 
-
-
 local function showSelectionUI(scriptList)
     local gui = Instance.new("ScreenGui")
     gui.Name = "ZenithScriptSelector"
@@ -203,8 +189,6 @@ local function showSelectionUI(scriptList)
     end
 end
 
-
-
 local placeId = game.PlaceId
 local gameId = game.GameId
 
@@ -216,18 +200,18 @@ if setclipboard then
     print("Copied GameId to clipboard.")
 end
 
-local scriptsForHere =
-    PLACE_SCRIPTS[placeId]
-    or GAME_SCRIPTS[gameId]
+local scriptsForHere = GAME_SCRIPTS[gameId]
 
 if scriptsForHere then
 
-    if scriptsForHere[1] and not scriptsForHere[2] then
+    -- If only 1 script exists, auto load it
+    if #scriptsForHere == 1 then
         loadScript(
             scriptsForHere[1].url,
             scriptsForHere[1].name
         )
     else
+        -- If multiple scripts exist, show selector UI
         showSelectionUI(scriptsForHere)
     end
 
